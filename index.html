@@ -1,27 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+25&display=swap"
+        rel="stylesheet">
     <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
+        @theme {
+            --color-primary: #00a7f5;
+            --color-secondary: #e22afa;
+            --font-baloo: 'Baloo Bhaijaan 2', cursive;
+            --font-jersey: 'Jersey 25', cursive;
+            --font-inter: 'Inter', sans-serif;
+        }
+        .button-prev-disabled {
+            @apply opacity-50 cursor-not-allowed;
+        }
+        /* 1/3 */
+        .step-1-of-3 > div:nth-of-type(1) > div:nth-of-type(1) {
+            @apply hidden;
+        }
+        .step-1-of-3 > div:nth-of-type(2) > div:nth-of-type(1) {
+            @apply hidden;
+        }
+        .step-1-of-3 > svg:nth-of-type(1) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-1-of-3 > svg:nth-of-type(2) {
+            @apply opacity-10;
+        }
+        .step-1-of-3 > svg:nth-of-type(3) {
+            @apply opacity-10;
+        }
+        /* 2/3 */
+        .step-2-of-3 > div:nth-of-type(1) > div:nth-of-type(1) {
+            @apply block;
+        }
+        .step-2-of-3 > div:nth-of-type(2) > div:nth-of-type(1) {
+            @apply hidden;
+        }
+        .step-2-of-3 > svg:nth-of-type(1) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-2-of-3 > svg:nth-of-type(2) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-2-of-3 > svg:nth-of-type(3) {
+            @apply opacity-10;
+        }
+        /* 3/3 */
+        .step-3-of-3 > div:nth-of-type(1) > div:nth-of-type(1) {
+            @apply block;
+        }
+        .step-3-of-3 > div:nth-of-type(2) > div:nth-of-type(1) {
+            @apply block;
+        }
+        .step-3-of-3 > svg:nth-of-type(1) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-3-of-3 > svg:nth-of-type(2) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-3-of-3 > svg:nth-of-type(3) {
+            @apply opacity-100 fill-blue-500;
+        }
+        .step-form {
+  display: none;
+}
+.step-form.active {
+  display: block;
+}
+
     </style>
     <title>Formulir - Siswa</title>
 </head>
-<body class="bg-white">
-    <div class="p-10 max-w-240">
-        <div class="bg-gradient-to-r from-sky-500 to-fuchsia-500 text-center ">
-            <h1 class="text-4xl font-extrabold">INPUT DATA SISWA</h1>
-            <h2>silakan lengkapi semua data siswa dengan benar</h2>
-            <div>
-                <div></div>
-                <div></div>
+
+<body class="bg-white max-w-240 mx-auto ">
+    <div class="p-10">
+        <div class="mx-auto text-white">
+            <div class="bg-gradient-to-r from-sky-500 to-fuchsia-500 p-5 text-center">
+                <h1 class="text-4xl font-extrabold italic font-inter">INPUT DATA SISWA</h1>
+                <h2 class="font-inter py-1">silakan lengkapi semua data siswa dengan benar</h2>
+                <div class="relative py-2">
+                    <div id="progressBar" class="h-2 bg-white rounded-full absolute"></div>
+                    <div class="h-2 bg-black/45 rounded-full"></div>
+                </div>
+                <h2 id="stepTitle" class="font-jersey text-2xl">Langkah 1 Dari 6</h2>
             </div>
-            <h2>Langkah 1 Dari 6</h2>
+            <div id="stepIndicator" class="flex justify-between items-center gap-3 my-10 step-X-of-3">
+                <svg class="w-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                    <path
+                        d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-240v-32q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v32q0 33-23.5 56.5T720-160H240q-33 0-56.5-23.5T160-240Zm80 0h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
+                </svg>
+                <div class="relative w-full">
+                    <div class="h-1 bg-primary rounded-full w-full absolute"></div>
+                    <div class="h-1 bg-black/10 rounded-full"></div>
+                </div>
+                <svg class="w-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                    <path
+                        d="M40-272q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v32q0 33-23.5 56.5T600-160H120q-33 0-56.5-23.5T40-240v-32Zm800 112H738q11-18 16.5-38.5T760-240v-40q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v40q0 33-23.5 56.5T840-160ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm400-160q0 66-47 113t-113 47q-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113ZM120-240h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 320Zm0-400Z" />
+                </svg>
+                <div class="relative w-full">
+                    <div class="h-1 bg-primary rounded-full w-full absolute"></div>
+                    <div class="h-1 bg-black/10 rounded-full"></div>
+                </div>
+                <svg class="w-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                    <path
+                        d="M360-440h240q17 0 28.5-11.5T640-480q0-17-11.5-28.5T600-520H360q-17 0-28.5 11.5T320-480q0 17 11.5 28.5T360-440Zm0 120h240q17 0 28.5-11.5T640-360q0-17-11.5-28.5T600-400H360q-17 0-28.5 11.5T320-360q0 17 11.5 28.5T360-320Zm0 120h120q17 0 28.5-11.5T520-240q0-17-11.5-28.5T480-280H360q-17 0-28.5 11.5T320-240q0 17 11.5 28.5T360-200ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h287q16 0 30.5 6t25.5 17l194 194q11 11 17 25.5t6 30.5v447q0 33-23.5 56.5T720-80H240Zm480-520H580q-25 0-42.5-17.5T520-660v-140H240v640h480v-440ZM240-800v200-200 640-640Z" />
+                </svg>
+            </div>
+        </div>
+        <div class="mx-auto">
+            <form action="/siswa" method="post">
+                <!-- STEP 1 -->
+                <div id="form-step-1" class="step-form active">
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama1 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+                <!-- STEP 2 -->
+                <div id="form-step-2" class="step-form">
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama2 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+                <div id="form-step-3" class="step-form">
+                    <!-- STEP 3 -->
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama3 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+                <div id="form-step-4" class="step-form">
+                    <!-- STEP 4 -->
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama4 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+                <div id="form-step-5" class="step-form">
+                    <!-- STEP 5 -->
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama5 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+                <div id="form-step-6" class="step-form">
+                    <!-- STEP 6 -->
+                    <div class="mb-5">
+                        <label for="nama" class="block mb-2 font-bold text-gray-600 font-baloo">Nama6 Lengkap</label>
+                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="tanggal_lahir" class="block mb-2 font-bold text-gray-600">Tanggal Lahir</label>
+                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="jenis_kelamin" class="block mb-2 font-bold text-gray-600">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" id="jenis_kelamin"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="agama" class="block mb-2 font-bold text-gray-600">Agama</label>
+                        <select name="agama" id="agama" class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                            <option value="">-- Pilih Agama --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="alamat" class="block mb-2 font-bold text-gray-600">Alamat</label>
+                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="no_hp" class="block mb-2 font-bold text-gray-600">No. HP</label>
+                        <input type="text" name="no_hp" id="no_hp" placeholder="Masukkan No. HP"
+                            class="border border-gray-300 shadow p-3 w-full rounded mb-">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 font-bold text-gray-600">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan Email"
+                            class="border border-gray-300 shadow p-3 w-full rounded">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="flex justify-between mx-auto text-xl font-jersey">
+            <button id="prevBtn" class="border p-2 rounded-md flex items-center button-prev-disabled">
+                <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                    <path
+                        d="m142-480 294 294q15 15 14.5 35T435-116q-15 15-35 15t-35-15L57-423q-12-12-18-27t-6-30q0-15 6-30t18-27l308-308q15-15 35.5-14.5T436-844q15 15 15 35t-15 35L142-480Z" />
+                </svg>
+                SEBELUMNYA
+            </button>
+            <button id="nextBtn" class="border p-2 rounded-md flex items-center">
+                Selanjutnya
+                <svg class="size-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                    <path
+                        d="M579-480 285-774q-15-15-14.5-35.5T286-845q15-15 35.5-15t35.5 15l307 308q12 12 18 27t6 30q0 15-6 30t-18 27L356-115q-15 15-35 14.5T286-116q-15-15-15-35.5t15-35.5l293-293Z" />
+                </svg>
+            </button>
         </div>
     </div>
+    <script>
+  let currentStep = 1;
+  const totalSteps = 6;
+
+  const stepIndicator = document.getElementById('stepIndicator');
+  const stepTitle = document.getElementById('stepTitle');
+  const progressBar = document.getElementById('progressBar');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const updateFormVisibility = () => {
+    for (let i = 1; i <= totalSteps; i++) {
+      const formBlock = document.getElementById(`form-step-${i}`);
+      formBlock.classList.remove('active');
+    }
+    document.getElementById(`form-step-${currentStep}`).classList.add('active');
+  };
+
+  const updateStepIndicatorClass = () => {
+    stepIndicator.classList.remove('step-1-of-3', 'step-2-of-3', 'step-3-of-3');
+    if (currentStep <= 2) {
+      stepIndicator.classList.add('step-1-of-3');
+    } else if (currentStep <= 4) {
+      stepIndicator.classList.add('step-2-of-3');
+    } else {
+      stepIndicator.classList.add('step-3-of-3');
+    }
+  };
+
+  const updateStep = () => {
+    // Update indikator visual
+    updateStepIndicatorClass();
+
+    // Update teks langkah
+    stepTitle.textContent = `Langkah ${currentStep} Dari ${totalSteps}`;
+
+    // Update progress bar
+    const progress = (currentStep / totalSteps) * 100;
+    progressBar.style.width = `${progress}%`;
+
+    // Update form aktif
+    updateFormVisibility();
+
+    // Update tombol
+    prevBtn.classList.toggle('button-prev-disabled', currentStep === 1);
+    nextBtn.innerHTML = currentStep === totalSteps
+      ? `Selesai <svg class="size-6 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M579-480 285-774q-15-15-14.5-35.5T286-845q15-15 35.5-15t35.5 15l307 308q12 12 18 27t6 30q0 15-6 30t-18 27L356-115q-15 15-35 14.5T286-116q-15-15-15-35.5t15-35.5l293-293Z"/></svg>`
+      : `Selanjutnya <svg class="size-6 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M579-480 285-774q-15-15-14.5-35.5T286-845q15-15 35.5-15t35.5 15l307 308q12 12 18 27t6 30q0 15-6 30t-18 27L356-115q-15 15-35 14.5T286-116q-15-15-15-35.5t15-35.5l293-293Z"/></svg>`;
+  };
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateStep();
+    } else {
+      alert('Form selesai dikirim!');
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateStep();
+    }
+  });
+
+  updateStep(); // Initial render
+</script>
 </body>
+
 </html>
